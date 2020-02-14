@@ -114,9 +114,20 @@ REG RCGCGPIO  =        0x400FE608 ;
 
 
 
+//*******************PROTOTYPES**********************************
+void PORTF_COFIG_OUT (PIN_NUM);
+void PORTE_COFIG_OUT (PIN_NUM);
+void PORTA_COFIG_OUT (PIN_NUM);
+void PORTB_COFIG_OUT (PIN_NUM);
+void PORTC_COFIG_OUT (PIN_NUM);
+void PORTD_COFIG_OUT (PIN_NUM);
 
-
-
+void PORTF_COFIG_IN (PIN_NUM);
+void PORTA_COFIG_IN (PIN_NUM);
+void PORTB_COFIG_IN (PIN_NUM);
+void PORTC_COFIG_IN (PIN_NUM);
+void PORTD_COFIG_IN (PIN_NUM);
+void PORTE_COFIG_IN (PIN_NUM);
 
 
 
