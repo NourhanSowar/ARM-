@@ -8,271 +8,145 @@
 
 #include "GPIO.h"
 
-#define REG volatile unsigned long int *
-
-
-#define PIN_NUM
-
-
-void PORTA_COFIG_OUT (PIN_NUM)
+void gpio_init( port_select port , bus_select bus  )
 {
 
 
-    REG  GPIODIR =  AB(OFF_GPIODIR);
-    REG  GPIOAFSEL= AB(OFF_GPIOAFSEL);
-    REG  GPIODR8R = AB(OFF_GPIODR8R);
-    REG  GPIODEN=   AB(OFF_GPIODEN);
-    REG GPIOPUR =  AB(OFF_GPIOPUR);
+    switch (port)
+             {
+                 case PORTA:
+                     GPIOHBCTL_PORTA;
+                     RCGCGPIO_PORTA;
+
+                 case PORTB:
+                     GPIOHBCTL_PORTB;
+                     RCGCGPIO_PORTB;
+
+                 case PORTC:
+                     GPIOHBCTL_PORTC;
+                     RCGCGPIO_PORTC;
 
 
-    GPIOHBCTL_PORTA;
-    RCGCGPIO_PORTA;
-    GPIODIR_OUT(PIN_NUM);
-    GPIOAFSEL_GPIO;
-    GPIODR8R_8MA;
-    GPIOD_EN;
-    GPIO_PUR_DIS(PIN_NUM) ;
+                 case PORTD:
+                     GPIOHBCTL_PORTD;
+                     RCGCGPIO_PORTD;
 
+
+                 case PORTE:
+                     GPIOHBCTL_PORTE;
+                     RCGCGPIO_PORTE;
+
+
+                 case PORTF:
+                     GPIOHBCTL_PORTF;
+                     RCGCGPIO_PORTE;
+
+
+             }
+
+
+
+    if (bus == APB ){
+
+         switch (port)
+         {
+             case PORTA:
+                 GPIOHBCTL_PORTA_APB;
+                 RCGCGPIO_PORTA;
+
+
+             case PORTB:
+                 GPIOHBCTL_PORTB_APB;
+                 RCGCGPIO_PORTB;
+
+
+             case PORTC:
+                 GPIOHBCTL_PORTC_APB;
+                 RCGCGPIO_PORTC;
+
+
+             case PORTD:
+                 GPIOHBCTL_PORTD_APB;
+                 RCGCGPIO_PORTD;
+
+
+             case PORTE:
+                 GPIOHBCTL_PORTE_APB;
+                 RCGCGPIO_PORTE;
+
+
+             case PORTF:
+                 GPIOHBCTL_PORTF_APB;
+                 RCGCGPIO_PORTF;
+
+         }
+
+       }
+
+
+    }
+
+void gpio_mode (unsigned int  pin , gpio_digital enable , mode_t mode    )
+
+{
+    while  (mode == GPIOAFSEL_GPIO)
+    {
+
+        if (enable == GPIOD_EN )
+            *GPIODEN |= (1<<pin);
+
+        else ( enable == GPIO_DIS )
+                *GPIODEN &= ~(1<<pin);
+
+
+    }
 }
 
-
-void PORTB_COFIG_OUT (PIN_NUM)
+void driver_strength (unsigned int  pin ,pin_mode direction , output_rate rate  )
 {
 
+    if (directoin == GPIODIR_OUT)
+           {
+               *GPIODIR |= (1<<pin);
 
-    REG  GPIODIR =  BB(OFF_GPIODIR);
-    REG  GPIOAFSEL= BB(OFF_GPIOAFSEL);
-    REG  GPIODR8R = BB(OFF_GPIODR8R);
-    REG  GPIODEN=   BB(OFF_GPIODEN);
-    REG GPIOPUR =  BB(OFF_GPIOPUR);
+               switch (rate)
+               {
 
-
-    GPIOHBCTL_PORTB;
-    RCGCGPIO_PORTB;
-    GPIODIR_OUT(PIN_NUM);
-    GPIOAFSEL_GPIO;
-    GPIODR8R_8MA;
-    GPIOD_EN;
-    GPIO_PUR_DIS(PIN_NUM) ;
-
-}
-
-
-void PORTC_COFIG_OUT (PIN_NUM)
-{
-
-
-    REG  GPIODIR =  CB(OFF_GPIODIR);
-    REG  GPIOAFSEL= CB(OFF_GPIOAFSEL);
-    REG  GPIODR8R = CB(OFF_GPIODR8R);
-    REG  GPIODEN=   CB(OFF_GPIODEN);
-    REG GPIOPUR =   CB(OFF_GPIOPUR);
-
-
-    GPIOHBCTL_PORTC;
-    RCGCGPIO_PORTC;
-    GPIODIR_OUT(PIN_NUM);
-    GPIOAFSEL_GPIO;
-    GPIODR8R_8MA;
-    GPIOD_EN;
-    GPIO_PUR_DIS(PIN_NUM) ;
-
-}
-
-
-void PORTD_COFIG_OUT (PIN_NUM)
-{
-
-
-    REG  GPIODIR =  DB(OFF_GPIODIR);
-    REG  GPIOAFSEL= DB(OFF_GPIOAFSEL);
-    REG  GPIODR8R = DB(OFF_GPIODR8R);
-    REG  GPIODEN=   DB(OFF_GPIODEN);
-    REG GPIOPUR =   DB(OFF_GPIOPUR);
-
-
-    GPIOHBCTL_PORTD;
-    RCGCGPIO_PORTD;
-    GPIODIR_OUT(PIN_NUM);
-    GPIOAFSEL_GPIO;
-    GPIODR8R_8MA;
-    GPIOD_EN;
-    GPIO_PUR_DIS(PIN_NUM) ;
-
-}
-
-
-void PORTE_COFIG_OUT (PIN_NUM)
-{
-
-
-    REG  GPIODIR =  EB(OFF_GPIODIR);
-    REG  GPIOAFSEL= EB(OFF_GPIOAFSEL);
-    REG  GPIODR8R = EB(OFF_GPIODR8R);
-    REG  GPIODEN=   EB(OFF_GPIODEN);
-    REG GPIOPUR =   EB(OFF_GPIOPUR);
-
-
-    GPIOHBCTL_PORTE;
-    RCGCGPIO_PORTE;
-    GPIODIR_OUT(PIN_NUM);
-    GPIOAFSEL_GPIO;
-    GPIODR8R_8MA;
-    GPIOD_EN;
-    GPIO_PUR_DIS(PIN_NUM) ;
-
-}
-
-
-void PORTF_COFIG_OUT (PIN_NUM)
-{
-
-
-    REG  GPIODIR =  FB(OFF_GPIODIR);
-    REG  GPIOAFSEL= FB(OFF_GPIOAFSEL);
-    REG  GPIODR8R = FB(OFF_GPIODR8R);
-    REG  GPIODEN=   FB(OFF_GPIODEN);
-    REG GPIOPUR =   FB(OFF_GPIOPUR);
-
-
-    GPIOHBCTL_PORTF;
-    RCGCGPIO_PORTF;
-    GPIODIR_OUT(PIN_NUM);
-    GPIOAFSEL_GPIO;
-    GPIODR8R_8MA;
-    GPIOD_EN;
-    GPIO_PUR_DIS(PIN_NUM) ;
-
+                   case GPIODR2R_2MA :
+                       *GPIODR2R |= (1<<pin);
+                       break;
+                   case GPIODR4R_4MA :
+                       *GPIODR4R |= (1<<pin);
+                       break;
+                   case GPIODR8R_8MA :
+                       *GPIODR8R |= (1<<pin);
+                       break;
+               }
+           }
 }
 
 
 
 
 
+//
+//void PORTA_CONFIG_OUT (PIN_NUM , output_rate rate ,  )
+//{
+//
+//
+//    REG  GPIODIR =  AB(OFF_GPIODIR);
+//    REG  GPIOAFSEL= AB(OFF_GPIOAFSEL);
+//    REG  GPIODR8R = AB(OFF_GPIODR8R);
+//    REG  GPIODEN=   AB(OFF_GPIODEN);
+//    REG GPIOPUR =  AB(OFF_GPIOPUR);
+//
+//
+//    GPIOHBCTL_PORTA;
+//    RCGCGPIO_PORTA;
+//    GPIODIR_OUT(PIN_NUM);
+//    GPIOAFSEL_GPIO;
+//    GPIOD_EN;
+//    GPIO_PUR_DIS(PIN_NUM) ;
+//
+//}
 
-void PORTA_COFIG_IN (PIN_NUM)
-{
-
-
-    REG  GPIODIR =  AB(OFF_GPIODIR);
-    REG  GPIOAFSEL= AB(OFF_GPIOAFSEL);
-    REG  GPIODR8R = AB(OFF_GPIODR8R);
-    REG  GPIODEN=   AB(OFF_GPIODEN);
-    REG GPIOPUR =   AB(OFF_GPIOPUR);
-
-
-    GPIOHBCTL_PORTA;
-    RCGCGPIO_PORTA;
-
-    GPIODIR_IN(PIN_NUM)
-    GPIOAFSEL_GPIO;
-    GPIODR8R_8MA;
-    GPIOD_EN;
-    GPIO_PUR_EN(PIN_NUM) ;
-}
-
-void PORTB_COFIG_IN (PIN_NUM)
-{
-
-
-    REG  GPIODIR =  BB(OFF_GPIODIR);
-    REG  GPIOAFSEL= BB(OFF_GPIOAFSEL);
-    REG  GPIODR8R = BB(OFF_GPIODR8R);
-    REG  GPIODEN=   BB(OFF_GPIODEN);
-    REG GPIOPUR =   BB(OFF_GPIOPUR);
-
-
-    GPIOHBCTL_PORTB;
-    RCGCGPIO_PORTB;
-
-    GPIODIR_IN(PIN_NUM)
-    GPIOAFSEL_GPIO;
-    GPIODR8R_8MA;
-    GPIOD_EN;
-    GPIO_PUR_EN(PIN_NUM) ;
-}
-
-
-void PORTC_COFIG_IN (PIN_NUM)
-{
-
-
-    REG  GPIODIR =  CB(OFF_GPIODIR);
-    REG  GPIOAFSEL= CB(OFF_GPIOAFSEL);
-    REG  GPIODR8R = CB(OFF_GPIODR8R);
-    REG  GPIODEN=   CB(OFF_GPIODEN);
-    REG GPIOPUR =   CB(OFF_GPIOPUR);
-
-
-    GPIOHBCTL_PORTC;
-    RCGCGPIO_PORTC;
-
-    GPIODIR_IN(PIN_NUM)
-    GPIOAFSEL_GPIO;
-    GPIODR8R_8MA;
-    GPIOD_EN;
-    GPIO_PUR_EN(PIN_NUM) ;
-}
-
-void PORTD_COFIG_IN (PIN_NUM)
-{
-
-
-    REG  GPIODIR =  DB(OFF_GPIODIR);
-    REG  GPIOAFSEL= DB(OFF_GPIOAFSEL);
-    REG  GPIODR8R = DB(OFF_GPIODR8R);
-    REG  GPIODEN=   DB(OFF_GPIODEN);
-    REG GPIOPUR =   DB(OFF_GPIOPUR);
-
-
-    GPIOHBCTL_PORTD;
-    RCGCGPIO_PORTD;
-
-    GPIODIR_IN(PIN_NUM)
-    GPIOAFSEL_GPIO;
-    GPIODR8R_8MA;
-    GPIOD_EN;
-    GPIO_PUR_EN(PIN_NUM) ;
-}
-
-
-void PORTE_COFIG_IN (PIN_NUM)
-{
-
-
-    REG  GPIODIR =  EB(OFF_GPIODIR);
-    REG  GPIOAFSEL= EB(OFF_GPIOAFSEL);
-    REG  GPIODR8R = EB(OFF_GPIODR8R);
-    REG  GPIODEN=   EB(OFF_GPIODEN);
-    REG GPIOPUR =   EB(OFF_GPIOPUR);
-
-
-    GPIOHBCTL_PORTE;
-    RCGCGPIO_PORTE;
-
-    GPIODIR_IN(PIN_NUM)
-    GPIOAFSEL_GPIO;
-    GPIODR8R_8MA;
-    GPIOD_EN;
-    GPIO_PUR_EN(PIN_NUM) ;
-}
-void PORTF_COFIG_IN (PIN_NUM)
-{
-
-
-    REG  GPIODIR =  FB(OFF_GPIODIR);
-    REG  GPIOAFSEL= FB(OFF_GPIOAFSEL);
-    REG  GPIODR8R = FB(OFF_GPIODR8R);
-    REG  GPIODEN=   FB(OFF_GPIODEN);
-    REG GPIOPUR =   FB(OFF_GPIOPUR);
-
-
-    GPIOHBCTL_PORTF;
-    RCGCGPIO_PORTF;
-
-    GPIODIR_IN(PIN_NUM);
-    GPIOAFSEL_GPIO;
-    GPIODR8R_8MA;
-    GPIOD_EN;
-    GPIO_PUR_EN(PIN_NUM) ;
-}
