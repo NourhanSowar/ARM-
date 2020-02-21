@@ -2,7 +2,7 @@
 #ifndef GPIO_H_
 #define GPIO_H_
 
-#include " REGMAP  "
+#include "REGMAP.h"
 
 
 
@@ -76,13 +76,13 @@
 //THIRD, DETERMINE THE DIRECTION IN OR OUT
 #define PIN  // USER DETERMINE WHICH THE PIN IS USED
 
-#define GPIODIR_IN                   //*GPIODIR &= ~(1<<PIN)
-#define GPIODIR_OUT                   // *GPIODIR |= (1<<PIN)
+//#define GPIODIR_IN                   //*GPIODIR &= ~(1<<PIN)
+//#define GPIODIR_OUT                   // *GPIODIR |= (1<<PIN)
 
 typedef enum
 {
     GPIODIR_IN,
-    GPIODIR_OUT,
+    GPIODIR_OUT
 
 
 }pin_mode ;
@@ -94,14 +94,14 @@ typedef enum
 
 //ALTERNATE FUNCTION CONTROL
 
-#define GPIOAFSEL_GPIO                   //*GPIOAFSEL &= ~(1<<1)
-#define GPIOAFSEL_ALT                    //*GPIOAFSEL |=  (1<<1)
+//#define GPIOAFSEL_GPIO                   //*GPIOAFSEL &= ~(1<<1)
+//#define GPIOAFSEL_ALT                    //*GPIOAFSEL |=  (1<<1)
 
 
 typedef enum
 {
     GPIOAFSEL_GPIO,
-    GPIOAFSEL_ALT,
+    GPIOAFSEL_ALT
 
 
 
@@ -112,9 +112,9 @@ typedef enum
 
 //**************************************************************
 
-#define GPIODR2R_2MA                     //*GPIODR2R |= (1<<PIN)
-#define GPIODR4R_4MA                     //*GPIODR4R |= (1<<PIN)
-#define GPIODR8R_8MA                    //*GPIODR8R |= (1<<PIN)
+//#define GPIODR2R_2MA                     //*GPIODR2R |= (1<<PIN)
+//#define GPIODR4R_4MA                     //*GPIODR4R |= (1<<PIN)
+//#define GPIODR8R_8MA                    //*GPIODR8R |= (1<<PIN)
 
 
 typedef enum
@@ -130,13 +130,13 @@ typedef enum
 //***********************************************************
 
 //DIGITAL ENABLE
-#define GPIOD_EN                         //*GPIODEN |= (1<<PIN)
-#define GPIO_DIS                         //*GPIODEN &= ~(1<<PIN)
+//#define GPIOD_EN                         //*GPIODEN |= (1<<PIN)
+//#define GPIO_DIS                         //*GPIODEN &= ~(1<<PIN)
 
 typedef enum
 {
-    GPIOD_EN;
-    GPIO_DIS;
+    GPIOD_EN,
+    GPIO_DIS
 
 }gpio_digital ;
 
@@ -150,7 +150,27 @@ typedef enum
 
 
 //*******************PROTOTYPES**********************************
+void gpio_init( port_select port , bus_select bus  );
+void gpio_mode (unsigned int  pin , gpio_digital enable , mode_t mode    ) ;
+void pin_modes (unsigned int  pin ,pin_mode direction , output_rate rate  );
+void driver_strength (unsigned int  pin ,output_rate rate  );
+unsigned char GPIORead (unsigned long int port, unsigned char pins);
+void GPIOWrite( unsigned char pin, unsigned char data);
 
+
+void REG_PORTA_INTI_AHB();
+void REG_PORTB_INTI_AHB();
+void REG_PORTC_INTI_AHB();
+void REG_PORTD_INTI_AHB();
+void REG_PORTE_INTI_AHB();
+void REG_PORTF_INTI_AHB();
+
+void REG_PORTA_INTI_APB();
+void REG_PORTB_INTI_APB();
+void REG_PORTC_INTI_APB();
+void REG_PORTD_INTI_APB();
+void REG_PORTE_INTI_APB();
+void REG_PORTF_INTI_APB();
 
 
 #endif /* GPIO_H_ */
