@@ -16,7 +16,6 @@
 
 
 
-
  typedef enum
     {
         PORTA,
@@ -151,11 +150,11 @@ typedef enum
 
 //*******************PROTOTYPES**********************************
 void gpio_init( port_select port , bus_select bus  );
-void gpio_mode (unsigned int  pin , gpio_digital enable , mode_t mode    ) ;
-void pin_modes (unsigned int  pin ,pin_mode direction , output_rate rate  );
-void driver_strength (unsigned int  pin ,output_rate rate  );
-unsigned char GPIORead (unsigned long int port, unsigned char pins);
-void GPIOWrite( unsigned char pin, unsigned char data);
+void gpio_mode (unsigned long int port,unsigned int  pin , gpio_digital enable , mode_t mode    ) ;
+void pin_modes (unsigned long int port,unsigned int  pin ,pin_mode direction , output_rate rate  );
+void driver_strength (unsigned long int port,unsigned int  pin ,output_rate rate  );
+unsigned char GPIORead(unsigned long int port, unsigned char pins);
+void GPIOWrite( unsigned long int port,unsigned char pin, unsigned char data);
 
 
 void REG_PORTA_INTI_AHB();

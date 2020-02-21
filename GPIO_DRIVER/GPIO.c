@@ -10,21 +10,6 @@
 #include "REGMAP.h"
 
 
-    REG  GPIODIR =  AB(OFF_GPIODIR);
-    REG  GPIOAFSEL= AB(OFF_GPIOAFSEL);
-    REG  GPIODR8R = AB(OFF_GPIODR8R);
-    REG  GPIODR4R = AB(OFF_GPIODR4R);
-    REG  GPIODR2R = AB(OFF_GPIODR2R);
-
-    REG  GPIODEN=   AB(OFF_GPIODEN);
-    REG GPIOPUR =   AB(OFF_GPIOPUR);
-    REG GPIODATA =  AB(OFF_GPIODATA);
-    REG GPIOPCTL =  AB(OFF_GPIOPCTL);
-    REG GPIOAMSEL = AB(OFF_GPIOAMSEL);
-    REG GPIOSLR  =  AB(OFF_GPIOSLR);
-    REG GPIOPDR  =  AB(OFF_GPIOPDR);
-    REG GPIOODR  =  AB(OFF_GPIOODR);
-
 void gpio_init( port_select port , bus_select bus  )
 {
 
@@ -146,7 +131,7 @@ void gpio_init( port_select port , bus_select bus  )
 
     }
 
-void gpio_mode (unsigned int  pin , gpio_digital enable , mode_t mode    ) // alternative and digital
+void gpio_mode (unsigned long int port,unsigned int  pin , gpio_digital enable , mode_t mode    ) // alternative and digital
 
 {
     while  (mode == GPIOAFSEL_GPIO)
@@ -162,16 +147,16 @@ void gpio_mode (unsigned int  pin , gpio_digital enable , mode_t mode    ) // al
     }
 }
 
-void pin_modes (unsigned int  pin ,pin_mode direction , output_rate rate  )  // in or out
+void pin_modes (unsigned long int port,unsigned int  pin ,pin_mode direction , output_rate rate  )  // in or out
 {
     unsigned char data;
-    unsigned long int port;
+   // unsigned long int port;
 
     if (direction == GPIODIR_OUT)
            {
                *GPIODIR |= (1<<pin);
-               GPIOWrite( pin, data);
-               driver_strength (  pin , rate  );
+               GPIOWrite(  port,pin, data);
+               driver_strength ( port, pin , rate  );
 
 
            }
@@ -186,7 +171,7 @@ void pin_modes (unsigned int  pin ,pin_mode direction , output_rate rate  )  // 
         }
 }
 
-void driver_strength (unsigned int  pin ,output_rate rate  )
+void driver_strength (unsigned long int port,unsigned int  pin ,output_rate rate  )
 {
     switch (rate)
      {
@@ -217,7 +202,7 @@ unsigned char GPIORead(unsigned long int port, unsigned char pins)
 
 }
 
-void GPIOWrite( unsigned char pin, unsigned char data)
+void GPIOWrite( unsigned long int port,unsigned char pin, unsigned char data)
 {
 
     *GPIODATA = (data<<pin);
@@ -227,25 +212,4 @@ void GPIOWrite( unsigned char pin, unsigned char data)
 
 
 
-
-//
-//void PORTA_CONFIG_OUT (PIN_NUM , output_rate rate ,  )
-//{
-//
-//
-//    REG  GPIODIR =  AB(OFF_GPIODIR);
-//    REG  GPIOAFSEL= AB(OFF_GPIOAFSEL);
-//    REG  GPIODR8R = AB(OFF_GPIODR8R);
-//    REG  GPIODEN=   AB(OFF_GPIODEN);
-//    REG GPIOPUR =  AB(OFF_GPIOPUR);
-//
-//
-//    GPIOHBCTL_PORTA;
-//    RCGCGPIO_PORTA;
-//    GPIODIR_OUT(PIN_NUM);
-//    GPIOAFSEL_GPIO;
-//    GPIOD_EN;
-//    GPIO_PUR_DIS(PIN_NUM) ;
-//
-//}
 
