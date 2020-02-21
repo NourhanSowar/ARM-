@@ -7,7 +7,7 @@
 
 #ifndef CLOCK_H_
 #define CLOCK_H_
-
+void clcok();
 volatile unsigned long int * RCC = 0x400FE060;
 
 //#define REG volatile unsigned long int *

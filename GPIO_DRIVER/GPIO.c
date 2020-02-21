@@ -147,7 +147,7 @@ void gpio_mode (unsigned long int port,unsigned int  pin , gpio_digital enable ,
     }
 }
 
-void pin_modes (unsigned long int port,unsigned int  pin ,pin_mode direction , output_rate rate  )  // in or out
+void pin_modes (unsigned long int port,unsigned int  pin ,pin_mode direction   )  // in or out
 {
     unsigned char data;
    // unsigned long int port;
@@ -202,13 +202,20 @@ unsigned char GPIORead(unsigned long int port, unsigned char pins)
 
 }
 
-void GPIOWrite( unsigned long int port,unsigned char pin, unsigned char data)
+void GPIOSET( unsigned long int port,unsigned char pin, unsigned char data)
 {
 
-    *GPIODATA = (data<<pin);
+    *GPIODATA |= (data<<pin);
 
 }
 
+
+void GPIODIS( unsigned long int port,unsigned char pin, unsigned char data)
+{
+
+    *GPIODATA &= ~(data<<pin);
+
+}
 
 
 
