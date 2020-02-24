@@ -42,22 +42,6 @@ typedef enum
 
 
 ////*********** ADDRESS OF  PORTS  BASE ADD+OFFSET******************//
-//
-////MACROS TO ADDRESS
-//#define AB(offest) A_AHB_BASE+offest
-//#define BB(offest) B_AHB_BASE+offest
-//#define CB(offest) C_AHB_BASE+offest
-//#define DB(offest) D_AHB_BASE+offest
-//#define EB(offest) E_AHB_BASE+offest
-//#define FB(offest) F_AHB_BASE+offest
-//
-////MACROS TO ADDRESS
-//#define AB_APB(offest) A_APB_BASE+offest
-//#define BB_APB(offest) B_APB_BASE+offest
-//#define CB_APB(offest) C_APB_BASE+offest
-//#define DB_APB(offest) D_APB_BASE+offest
-//#define EB_APB(offest) E_APB_BASE+offest
-//
 
 
 #define     A_AHB_BASE        0x40058000
