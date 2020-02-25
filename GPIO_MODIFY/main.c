@@ -37,7 +37,7 @@ pull_up(PORTF, 4);
 //SWITCH F0,F4
 
 driver_strength (PORTF,1 ,GPIODR8R_8MA );
- unsigned char mask_sw = GPIORead(PORTF, 4);
+ unsigned char mask_sw = GPIORead(PORTF, 4 , 60);
  //mask_sw = mask_sw >> 2;
 set_pin( PORTF,1,mask_sw);
 
