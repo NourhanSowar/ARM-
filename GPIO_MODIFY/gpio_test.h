@@ -171,6 +171,7 @@ typedef enum
     void set_pin(   unsigned long int port,   unsigned char pin,   unsigned char mask );
     void clear_pin( unsigned long int port, unsigned char pin, unsigned char mask );
     void driver_strength (unsigned long int port,unsigned int  pin ,output_rate rate  );
-    unsigned char GPIORead(unsigned long int port, unsigned char pins);
+    unsigned char GPIORead(unsigned long int port, unsigned char pins ,unsigned char mask);
+    void pull_up(unsigned long int port, unsigned char pins );
     void pull_up(unsigned long int port, unsigned char pins );
 #endif /* GPIO_TEST_H_ */
