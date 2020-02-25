@@ -43,17 +43,16 @@ set_pin( PORTF,1,mask_sw);
 
 //set_pin( PORTF,1,8);
 
-//int i,j;
-//for(i=0 ; i <3180 ; i++){
-//
-//    for (j=0 ; j<i ;j++)
-//    {
-//
-//    }
-//
-//}
+//for delay **********
+int i,j;
+for(i=0 ; i <3180 ; i++){
 
-//clear_pin( PORTF,1 ,8);
+	for (j=0 ; j<i ;j++)
+    	{
+    	}
+}
+
+clear_pin( PORTF,1 ,8);
 
 
 	return 0;
