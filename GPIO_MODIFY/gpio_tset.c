@@ -229,9 +229,9 @@ void driver_strength (unsigned long int port,unsigned int  pin ,output_rate rate
 
 
 
-unsigned char GPIORead(unsigned long int port, unsigned char pins)
+unsigned char GPIORead(unsigned long int port, unsigned char pins ,, unsigned char mask)
 {
-    REG GPIODATA = B(OFF_GPIODATA);
+    REG GPIODATA = B(OFF_GPIODATA +mask);
     unsigned char reading ;
     reading =  *(GPIODATA);
     return reading ;
