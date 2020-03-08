@@ -1,9 +1,4 @@
-/*
- * interrupt.h
- *
- *  Created on: Feb 25, 2020
- *      Author: TARGET
- */
+
 
 #ifndef INTERRUPT_H_
 #define INTERRUPT_H_
@@ -49,4 +44,26 @@
 #define SWTRIG_ADD     0xE000EF00
 
 
+
+
+
+ //interuupt registers ***********
+#define     OFF_GPIOIS        0x404      // interrrupt sense
+#define     OFF_GPIOIBE       0x408     // interrupt both edges
+#define     OFF_GPIOIEV       0x40C     // interrupt event
+#define     OFF_GPIOIM        0x410     // interrupt mask
+#define     OFF_GPIORIS       0x414  // raw interrupt status
+
+
+
+
+
+
+void interrrupt_edges ( unsigned long int port, unsigned char pins , unsigned char edge );
+
+
 #endif /* INTERRUPT_H_ */
+
+
+
+

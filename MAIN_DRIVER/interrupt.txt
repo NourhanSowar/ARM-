@@ -1,0 +1,61 @@
+/*
+ * interrupt_test.c
+ *
+ *  Created on: Mar 7, 2020
+ *      Author: TARGET
+ */
+
+
+
+#include "interrupt.h"
+#define REG volatile unsigned long int *
+
+
+
+
+
+void interrrupt_edges ( unsigned long int port, unsigned char pins , unsigned char edge )
+{
+    REG GPIOIS   =  B(OFF_GPIOIS);
+    REG GPIOIBE  =  B(OFF_GPIOIBE);
+    REG GPIOIEV  =  B(OFF_GPIOIEV);
+    REG GPIOIM   =  B(OFF_GPIOIM);
+
+    *GPIOIM &= ~(1<<pin);  //CLEAR
+
+    *GPIOIS &= ~(1<<pin);  //EDGES
+    *GPIOIBE &= ~(1<<pin);  //MAKE CONTROLLED BY IEV
+
+    if ( edge == low ){
+
+    *GPIOIEV &= ~(1<<pin);  //FALLING EDGE
+    }
+
+    else if ( edge == high ){
+
+    *GPIOIEV |= (1<<pin);  //rising EDGE
+    }
+
+    *GPIOIM |= (1<<pin);  //SET
+
+
+
+
+}
+
+
+
+/*
+ * interrupt.h
+ *
+ *  Created on: Feb 25, 2020
+ *      Author: TARGET
+ */
+
+
+
+
+
+
+
+

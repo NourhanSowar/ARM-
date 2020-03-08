@@ -21,15 +21,15 @@ int main(void)
 
 
 gpio_init(PORTF,AHB );
-
-
-
 port_bus (PORTF , AHB);
 
 gpio_mode (PORTF , 1, GPIOD_EN , GPIOAFSEL_GPIO );
-pin_modes (PORTF ,   4,  GPIODIR_IN ); // switch
-pin_modes (PORTF ,   1 ,  GPIODIR_OUT ); //led red
-pull_up(PORTF, 4);
+gpio_mode (PORTF , 4, GPIOD_EN , GPIOAFSEL_GPIO );
+
+gpio_direction (PORTF ,   1 ,  GPIODIR_OUT ); //led red
+
+gpio_direction (PORTF ,   4,  GPIODIR_IN ); // switch
+//pull_up(PORTF, 4);
 
 
 
@@ -38,10 +38,17 @@ pull_up(PORTF, 4);
 
 driver_strength (PORTF,1 ,GPIODR8R_8MA );
 
-while (1)
-{
+
+
 unsigned int mask_sw =   GPIORead(PORTF, 4 );
- //mask_sw = mask_sw >> 2;
+
+//REG GPIODATA = B(OFF_GPIODATA+36);
+
+  //  unsigned char reading ;
+    //reading =  *(GPIODATA);
+
+
+ mask_sw = mask_sw >> 2;
 set_pin( PORTF,1,mask_sw);
 
 //set_pin( PORTF,1,8);
@@ -58,7 +65,7 @@ set_pin( PORTF,1,mask_sw);
 
 //clear_pin( PORTF,1 ,8);
 
-}
+
     return 0;
 
 
