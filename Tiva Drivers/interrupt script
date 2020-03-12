@@ -1,0 +1,55 @@
+
+//#include "TEST.h"
+
+#include <interrupt.h>
+
+
+
+
+int main(void)
+{
+    IntEn(30);
+    InDis(30) ;
+
+    Int_Reg(30,usr_isr_portF);
+    return 0;
+
+}
+
+//first  :inti ISR ?
+
+//void usr_isr_portF(void)//main.c //user yktb l code bta3o hna
+//{
+//
+//
+//
+//}
+
+
+void isr_PortF(void);   //Interrupt.h
+void Int_Reg(int interrupt_ID, void (*interrupt_to_register)(void));  //Interrupt.h
+
+
+void usr_isr_portF(void) //main.c
+{
+
+//USER FUNCTIONS
+}
+
+
+
+//notes
+
+void isr_portF(void)    //Interrupt.c  >>  as isr function   da li hktbo fl startup
+{
+   registered_interrupt_portF; // pointer to function  in .h   void (*interrupt_to_register)(void)  hn5leh y4awr 3l fun li user katbha as isr
+}
+
+//****************
+
+
+void Int_Reg(int interrupt_ID, void (*interrupt_to_register)(void))  //Interrupt.h   // bdelo  isr li 3ayzo y48lo lma y7sl interrupt
+{
+    if (interrupt_ID == 30)
+        registered_interrupt_portF = interrupt_to_register;
+}
