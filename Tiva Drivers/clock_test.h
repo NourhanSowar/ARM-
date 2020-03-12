@@ -1,9 +1,3 @@
-/*
- * clock.h
- *
- *  Created on: Feb 12, 2020
- *      Author: TARGET
- */
 
 #ifndef CLOCK_H_
 #define CLOCK_H_
